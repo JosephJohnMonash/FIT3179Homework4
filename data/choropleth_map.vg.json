@@ -1,0 +1,32 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "",
+    "width": 1500,
+    "height": 900,
+    "projection": {"type": "equirectangular", "scale": 6000, "center": [145.0441008,-38.01992386]},
+    "data": {
+      "url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179DataVis2/main/SA2_2016_AUST%20(1).json",
+      "format": {"type": "topojson", "feature": "SA2_2016_AUST"}
+    },
+    "transform": [
+      {
+        "lookup": "properties.SA2_MAIN16",
+        "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179DataVis2/main/2016Census_G02_VIC_SA2.csv"
+          },
+          "key": "SA2_MAINCODE_2016",
+          "fields": ["Average_household_size"]
+        }
+      }
+    ],
+    "mark": {"type": "geoshape"},
+    "encoding": {
+      "color": {"field": "Average_household_size", "type": "quantitative"},
+      "tooltip": [
+        {"field": "properties.SA2_NAME16", "type": "nominal", "title": "SA2 Region: "},
+        {"field": "Average_household_size", "type": "quantitative", "title": "HH Size: "}
+      ]
+    }
+  }
+  
